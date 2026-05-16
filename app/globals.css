@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-open-sans), Arial, sans-serif;
+
+  --color-brand-red:        #cc0000;
+  --color-brand-dark:       #171a20;
+  --color-brand-black:      #000000;
+  --color-brand-gray-dark:  #393c41;
+  --color-brand-gray-mid:   #5c5e62;
+  --color-brand-gray-light: #f4f4f4;
+
+  --size-1x: 8px;
+  --size-2x: 16px;
+  --size-3x: 24px;
+  --size-4x: 32px;
+  --size-5x: 40px;
+  --size-6x: 48px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f4f4; 
+  --foreground: #171a20;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-open-sans), Arial, sans-serif;
+}
+
+.mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib,
+.mapboxgl-ctrl-attrib-button,
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Oscurecer mapa de forma eficiente */
+.mapboxgl-canvas {
+  filter: brightness(0.82) contrast(1.05) saturate(0.95) !important;
 }
