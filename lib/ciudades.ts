@@ -1,0 +1,40 @@
+// Ciudades para el formulario de cotización: capitales de departamento, Bogotá D.C.
+// y las principales ciudades de cada región. Los demás municipios se escriben con "Otro municipio".
+export const DEPARTAMENTOS: { departamento: string; ciudades: string[] }[] = [
+  { departamento: "Bogotá D.C.", ciudades: ["Bogotá"] },
+  { departamento: "Amazonas", ciudades: ["Leticia"] },
+  { departamento: "Antioquia", ciudades: ["Medellín", "Apartadó", "Bello", "Caldas", "Envigado", "Itagüí", "La Estrella", "Rionegro", "Sabaneta", "Turbo"] },
+  { departamento: "Arauca", ciudades: ["Arauca"] },
+  { departamento: "Archipiélago de San Andrés, Providencia y Santa Catalina", ciudades: ["San Andrés"] },
+  { departamento: "Atlántico", ciudades: ["Barranquilla", "Malambo", "Puerto Colombia", "Soledad"] },
+  { departamento: "Bolívar", ciudades: ["Cartagena de Indias", "Magangué", "Turbaco"] },
+  { departamento: "Boyacá", ciudades: ["Tunja", "Chiquinquirá", "Duitama", "Sogamoso"] },
+  { departamento: "Caldas", ciudades: ["Manizales", "La Dorada"] },
+  { departamento: "Caquetá", ciudades: ["Florencia"] },
+  { departamento: "Casanare", ciudades: ["Yopal"] },
+  { departamento: "Cauca", ciudades: ["Popayán"] },
+  { departamento: "Cesar", ciudades: ["Valledupar", "Aguachica"] },
+  { departamento: "Chocó", ciudades: ["Quibdó"] },
+  { departamento: "Córdoba", ciudades: ["Montería", "Cereté", "Lorica", "Sahagún"] },
+  { departamento: "Cundinamarca", ciudades: ["Cajicá", "Chía", "Facatativá", "Funza", "Fusagasugá", "Girardot", "Madrid", "Mosquera", "Soacha", "Zipaquirá"] },
+  { departamento: "Guainía", ciudades: ["Inírida"] },
+  { departamento: "Guaviare", ciudades: ["San José del Guaviare"] },
+  { departamento: "Huila", ciudades: ["Neiva", "Garzón", "La Plata", "Pitalito"] },
+  { departamento: "La Guajira", ciudades: ["Riohacha", "Maicao"] },
+  { departamento: "Magdalena", ciudades: ["Santa Marta", "Ciénaga"] },
+  { departamento: "Meta", ciudades: ["Villavicencio", "Acacías", "Granada"] },
+  { departamento: "Nariño", ciudades: ["Pasto", "Ipiales", "Tumaco"] },
+  { departamento: "Norte de Santander", ciudades: ["Cúcuta", "Ocaña", "Pamplona", "Villa del Rosario"] },
+  { departamento: "Putumayo", ciudades: ["Mocoa"] },
+  { departamento: "Quindío", ciudades: ["Armenia", "Calarcá"] },
+  { departamento: "Risaralda", ciudades: ["Pereira", "Dosquebradas", "Santa Rosa de Cabal"] },
+  { departamento: "Santander", ciudades: ["Bucaramanga", "Barrancabermeja", "Floridablanca", "Girón", "Piedecuesta", "San Gil"] },
+  { departamento: "Sucre", ciudades: ["Sincelejo"] },
+  { departamento: "Tolima", ciudades: ["Ibagué", "Espinal", "Melgar"] },
+  { departamento: "Valle del Cauca", ciudades: ["Cali", "Buenaventura", "Buga", "Cartago", "Jamundí", "Palmira", "Tuluá", "Yumbo"] },
+  { departamento: "Vaupés", ciudades: ["Mitú"] },
+  { departamento: "Vichada", ciudades: ["Puerto Carreño"] },
+];
+
+// Valor que se guarda: "Ciudad, Departamento" (Bogotá queda como "Bogotá, Bogotá D.C.")
+export const etiquetaCiudad = (ciudad: string, departamento: string) => `${ciudad}, ${departamento}`;

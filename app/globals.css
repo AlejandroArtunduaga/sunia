@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-open-sans), Arial, sans-serif;
+/* Inter se carga en layout.tsx con next/font (variable --font-inter) */
+@theme inline {
+  --font-sans: var(--font-inter), Arial, sans-serif;
+}
 
+@theme {
   --color-brand-red:        #cc0000;
   --color-brand-dark:       #171a20;
   --color-brand-black:      #000000;
@@ -30,7 +33,28 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-open-sans), Arial, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Botón de acción principal (verde tech) */
+.btn-tech {
+  display: inline-block;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.625rem 2rem;
+  border-radius: 0.25rem;
+  background-color: #00d166;
+  color: #ffffff;
+  letter-spacing: 0.025em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 18px rgba(0, 209, 102, 0.35);
+}
+
+.btn-tech:hover {
+  opacity: 0.9;
+  transform: scale(1.015);
+  box-shadow: 0 0 25px rgba(0, 209, 102, 0.55);
 }
 
 .mapboxgl-ctrl-logo,

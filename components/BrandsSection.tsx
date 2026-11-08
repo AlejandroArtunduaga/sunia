@@ -7,24 +7,24 @@ const FEATURES = [
   { 
     text: "Garantía internacional respaldada por fabricantes." 
   },
-  {  
+  {   
     text: "Equipos certificados con soporte técnico." 
   },
 ];
 
 export default function BrandsSection() {
   return (
-    <section id="marcas" className="bg-white my-12 relative w-full overflow-hidden font-sans">
+    <section id="energia"className="bg-white my-12 relative w-full overflow-hidden font-sans">
       
       <div className="max-w-[93.5%] mx-auto flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
         
-        {/* Columna Izquierda: Imagen con bordes redondeados */}
-        <div className="flex-1 w-full">
-          <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-lg">
+        {/* Columna Izquierda: Imagen con tamaño automático basado en su resolución real */}
+        <div className="flex-1 w-full flex justify-center lg:justify-start">
+          <div className="rounded-3xl overflow-hidden shadow-lg border border-gray-100">
             <img 
-              src="/marcas-tecnologia.avif" 
-              alt="Tecnología solar premium"
-              className="w-full h-full object-cover"
+              src="/marcaslideres.avif"
+              className="w-full h-auto max-w-full object-contain block"
+              alt="Marcas líderes en tecnología solar"
             />
           </div>
         </div>
@@ -39,16 +39,14 @@ export default function BrandsSection() {
             Tecnología solar de clase mundial
           </h2>
           
-          {/* LÍNEA MODIFICADA: Aquí verás el recuadro de color en tu editor para cambiarlo libremente */}
-          <p className="text-[#171a20] text-lg mb-8 leading-relaxed">
+          <p className="text-black text-lg mb-8 leading-relaxed opacity-80">
             Trabajamos con marcas líderes
           </p>
 
-          {/* Lista de características con tipografía Inter y color negro optimizado */}
+          {/* Lista de características */}
           <div className="space-y-5 mb-8">
             {FEATURES.map((feature, idx) => (
               <div key={idx} className="flex items-start gap-4">
-                {/* Icono Check Minimalista y Tecnológico */}
                 <span className="mt-1 flex-shrink-0 text-black">
                   <svg 
                     className="w-5 h-5" 
@@ -60,21 +58,12 @@ export default function BrandsSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                 </span>
-                {/* Texto en negro puro, fuente Inter mediana y tracking limpio */}
                 <p className="text-black text-lg font-medium leading-snug tracking-wide">
                   {feature.text}
                 </p>
               </div>
             ))}
           </div>
-
-          {/* Botón Estilo Premium */}
-          <a
-            href="#cotizar"
-            className="inline-block text-sm font-semibold px-8 py-3 rounded-full bg-black text-white hover:bg-[#171a20] transition-all duration-300 border border-black tracking-wide"
-          >
-            Ver catálogo
-          </a>
         </div>
 
       </div>

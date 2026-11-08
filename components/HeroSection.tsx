@@ -1,17 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+// Cada imagen vende un beneficio distinto; "tipo" preselecciona el formulario de cotización
+const SLIDES = [
+  {
+    image: "/residencial.avif",
+    title: "Hogar",
+    subtitle: "Genera tu propia energía y baja tu factura desde el primer mes",
+    datos: ["Un año de mantenimiento incluido", "Vende tus excedentes a la red", "25 a 30 años de energía limpia"],
+    tipo: "residencial",
+    info: "/hogar",
+  },
+  {
+    image: "/industrial1.avif",
+    title: "Industrial",
+    info: "/industrial",
+    subtitle: "Hasta 50 % de tu inversión deducible en renta",
+    datos: ["Sin IVA en equipos", "Depreciación acelerada en 3 años", "Respaldo de la Ley 1715"],
+    tipo: "industrial",
+  },
+  {
+    image: "/industrial-remoto.avif",
+    title: "Generación Remota",
+    info: "/generacion-remota",
+    subtitle: "Energía limpia para tu empresa, aunque no tengas espacio para paneles",
+    datos: ["Menos emisiones de CO₂", "Cumple tus metas de sostenibilidad", "Protégete de alzas en la tarifa"],
+    tipo: "industrial",
+  },
+];
 
 export default function HeroSection() {
-  const slides = [
-    { image: "/residencial.avif", title: "Hogar", subtitle: " Un año de mantenimiento incluido"},
-    { image: "/industrial1.avif", title: "Industrial", subtitle: "Impuestos 0%"},
-    { image: "/industrial-remoto.avif", title: "Generación Remota", subtitle: "Generación remota para tu empresa que está en otro lugar"}
-  ];
+  const slides = SLIDES;
   
   const [current, setCurrent] = useState(0);
   const nextSlide = () => setCurrent((p) => (p + 1) % slides.length);
   const prevSlide = () => setCurrent((p) => (p - 1 + slides.length) % slides.length);
+
+  // Avance automático cada 5 s; se reinicia cuando el usuario cambia de imagen
+  useEffect(() => {
+    const timer = setTimeout(() => setCurrent((p) => (p + 1) % SLIDES.length), 5000);
+    return () => clearTimeout(timer);
+  }, [current]);
 
   return (
     <section
@@ -111,11 +142,12 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-10 max-w-[93.5%] w-full -translate-y-34">
         {/* Text Carousel */}
-        <div className="relative min-h-[40px] md:min-h-[100px] mb-1">
+        {/* Todas las diapositivas en la misma celda: el bloque toma la altura de la más alta */}
+        <div className="grid mb-4">
           {slides.map((slide, i) => (
             <div
               key={i}
-              className={`absolute top-0 left-0 w-full transition-opacity duration-700 ease-in-out ${
+              className={`col-start-1 row-start-1 w-full transition-opacity duration-700 ease-in-out ${
                 i === current ? "opacity-100" : "opacity-0 pointer-events-none"
               }`}
             >
@@ -125,26 +157,35 @@ export default function HeroSection() {
               <p className="text-white text-lg md:text-xl">
                 {slide.subtitle}
               </p>
+              {/* Celular: un dato por línea; escritorio: en una línea separados por puntos */}
+              <ul className="mt-3 flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-x-2 gap-y-1 text-white/90 text-sm font-medium">
+                {slide.datos.map((dato, j) => (
+                  <li key={dato} className="flex items-center gap-2">
+                    {j > 0 && <span aria-hidden className="hidden md:inline text-[#00d166]">•</span>}
+                    {dato}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
 
         <div className="flex flex-col sm:flex-row gap-2 justify-center mt-1">
-          <a
-            href="#cotizar"
+          <Link
+            href={`/cotizar?tipo=${slides[current].tipo}`}
             onClick={(e) => e.stopPropagation()} // Previene que el click en el enlace cambie la foto
-            className="bg-[#429442] text-white text-sm font-semibold px-13 py-2 rounded  hover:bg-white hover:text-[#171a20] transition-all cursor-pointer"
+            className="btn-tech"
           >
             ¡Cotizar ahora!
-          </a>
-          <a
-            href="#productos"
+          </Link>
+          <Link
+            href={slides[current].info}
             onClick={(e) => e.stopPropagation()}
             // bg-white: fondo blanco | text-gray-500: letra gris
             className="text-sm font-semibold px-13 py-2 rounded transition-all cursor-pointer bg-white text-gray-800 hover:bg-gray-100"
           >
             Más información
-          </a>
+          </Link>
         </div>
       </div>
     </section>

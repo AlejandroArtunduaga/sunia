@@ -1,17 +1,26 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Map, { Marker, Popup, MapRef } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+// Punto de atención de referencia en cada ciudad: un centro comercial cercano al punto del mapa.
+// Direcciones tomadas de fuentes públicas (verificar con el centro comercial antes de publicar).
 const CITIES = [
-  { name: "Bogotá", installed: "", lat: 4.7110, lng: -74.0721 },
-  { name: "Medellín", installed: "", lat: 6.2442, lng: -75.5812 },
-  { name: "Cali", installed: "", lat: 3.4372, lng: -76.5197 },
-  { name: "Barranquilla", installed: "", lat: 10.9639, lng: -74.7964 },
-  { name: "Bucaramanga", installed: "", lat: 7.1298, lng: -73.1198 },
-  { name: "Cartagena", installed: "", lat: 10.3932, lng: -75.4794 },
+  { name: "Bogotá", lat: 4.7110, lng: -74.0721, mall: "C.C. Bulevar Niza", address: "Av. Cra. 58 # 127-59, Niza" },
+  { name: "Medellín", lat: 6.2442, lng: -75.5812, mall: "C.C. Unicentro Medellín", address: "Cra. 66B # 34A-76, Laureles" },
+  { name: "Cali", lat: 3.4372, lng: -76.5197, mall: "C.C. Centenario", address: "Av. 4 Norte # 7N-46, Centenario" },
+  { name: "Barranquilla", lat: 10.9639, lng: -74.7964, mall: "C.C. Portal del Prado", address: "Calle 53 # 46-192, El Prado" },
+  { name: "Manizales", lat: 5.0689, lng: -75.5174, mall: "C.C. Fundadores", address: "Cra. 21 con Calle 33B, Centro" },
+  { name: "Neiva", lat: 2.9273, lng: -75.2819, mall: "C.C. San Pedro Plaza", address: "Cra. 16 # 42-195" },
+  { name: "Villavicencio", lat: 4.1420, lng: -73.6266, mall: "C.C. Primavera Urbana", address: "Calle 15 # 40-01" },
+  { name: "Bucaramanga", lat: 7.1298, lng: -73.1198, mall: "C.C. Megamall", address: "Cra. 33A # 29-15" },
+  { name: "Tunja", lat: 5.5353, lng: -73.3678, mall: "C.C. Unicentro Tunja", address: "Av. Universitaria # 39-77" },
+  { name: "Cartagena", lat: 10.3932, lng: -75.4794, mall: "C.C. Paseo de la Castellana", address: "Av. Pedro de Heredia, La Castellana" },
 ];
+
+const mapsUrl = (city: (typeof CITIES)[number]) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${city.mall} ${city.name} Colombia`)}`;
 
 const INITIAL_VIEW = { longitude: -74.0721, latitude: 4.7110, zoom: 5.5 };
 
@@ -38,7 +47,7 @@ export default function CoverageSection() {
         {/* Heading */}
         <div className="text-center mb-10">
           <p className="text-[#cc0000] text-xs font-bold tracking-[0.2em] uppercase mb-3">
-            Presencia nacional
+            Operación nacional
           </p>
           <h2 className="text-[#171a20] text-4xl md:text-5xl font-bold mb-4 tracking-tight">
             Cobertura en Colombia
@@ -97,7 +106,16 @@ export default function CoverageSection() {
                 >
                   <div className="p-3 bg-white rounded-lg">
                     <p className="font-bold text-[#171a20] text-sm mb-1">{popupInfo.name}</p>
-                    <p className="text-[#5c5e62] text-xs">{popupInfo.installed}</p>
+                    <p className="text-[#171a20] text-xs font-semibold">{popupInfo.mall}</p>
+                    <p className="text-[#5c5e62] text-xs mb-2">{popupInfo.address}</p>
+                    <a
+                      href={mapsUrl(popupInfo)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#1a4fd6] text-xs font-semibold underline underline-offset-2"
+                    >
+                      Cómo llegar
+                    </a>
                   </div>
                 </Popup>
               )}
